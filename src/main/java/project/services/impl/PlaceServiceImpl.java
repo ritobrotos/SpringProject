@@ -1,6 +1,5 @@
 package project.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,5 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
 	public List<Place> retrieveAllPlace() {
 		return placeDao.retrieveAllPlace();
-//		return new ArrayList<Place>();
 	}
 }
