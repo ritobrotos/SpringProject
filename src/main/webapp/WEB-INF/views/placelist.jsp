@@ -2,21 +2,40 @@
 <%@ page session="false" %>
 <html>
 <head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<title>Place List</title>
+	<style type="text/css">
+		.placeCard{
+			background-color: #ccffcc;
+			padding-top: 2px;
+			padding-left: 20px;
+			padding-bottom: 2px;
+			margin-bottom: 10px;
+		}
+	</style>
 </head>
 <body>
-<h1>
-	Place List 
-</h1>
-
-<table>
-	<c:forEach items="${placelist}" var="place">
-		 <tr>
-            <td>${place.id}</td>
-            <td>${place.name}</td>
-            <td>${place.category}</td>
-        </tr>
-	</c:forEach>
-</table>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="page-header">
+				  <h1>Place Lookup <small>- searching made easy!</small></h1>
+				</div>
+				
+				<c:forEach items="${placelist}" var="place">
+					<div class="placeCard">
+					  	<h3>${place.name} <small> Rating: ${place.rating} </small></h3>
+						<p>
+							Category: ${place.category} | <a>Locate on Map</a>
+						</p>
+					</div>
+				</c:forEach>
+				
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
 </body>
 </html>

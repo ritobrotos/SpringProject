@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import project.model.ListContainer;
 import project.model.Place;
 import project.services.PlaceService;
 
@@ -27,10 +28,14 @@ public class PlaceRestController {
 	PlaceService placeService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody List<Place> placeList() {
+	public @ResponseBody ListContainer placeList() {
 		logger.info("placelist logger..");
 		List<Place> placeList = placeService.retrieveAllPlace();
-		return placeList;
+		
+		ListContainer listResponse = new ListContainer();
+		listResponse.setPlaceList(placeList);
+		
+		return listResponse;
 	}
 
 }
