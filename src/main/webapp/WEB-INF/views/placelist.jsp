@@ -28,7 +28,7 @@
 					<div class="placeCard">
 					  	<h3>${place.name} <small> Rating: ${place.rating} </small></h3>
 						<p>
-							Category: ${place.category} | <a>Locate on Map</a>
+							Category: ${place.category} | <a href="place?id=${place.id}">Locate on Map</a>
 						</p>
 					</div>
 				</c:forEach>

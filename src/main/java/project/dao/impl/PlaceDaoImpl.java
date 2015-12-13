@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -52,6 +53,35 @@ public class PlaceDaoImpl extends JdbcDaoSupport implements PlaceDao {
 				}
 			});
 			return placeList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Place retrievePlaceById(int placeId) {
+		logger.info("Start retrievePlaceById:");
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+		parameters.addValue("id", placeId);
+		
+		try {
+			Place placeInfo = getJdbcTemplate().query(SELECT_ALL_PLACES_BY_ID, new ResultSetExtractor<Place>() {
+				@Override
+				public Place extractData(ResultSet rs) throws SQLException, DataAccessException {
+					Place place = new Place();
+					while (rs.next()) {
+						place.setId(rs.getInt("id"));
+						place.setName(rs.getString("name"));
+						place.setCategory(rs.getString("category"));
+						place.setRating(rs.getDouble("rating"));
+						place.setLatitude(rs.getDouble("latitude"));
+						place.setLongitude(rs.getDouble("longitude"));						
+					}
+					return place;
+				}
+			}, new Object[] { placeId });
+			return placeInfo;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

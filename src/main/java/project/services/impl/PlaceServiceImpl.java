@@ -22,4 +22,10 @@ public class PlaceServiceImpl implements PlaceService {
 	public List<Place> retrieveAllPlace() {
 		return placeDao.retrieveAllPlace();
 	}
+	
+	@Override
+	@Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+	public Place retrievePlaceById(int placeId) {
+		return placeDao.retrievePlaceById(placeId);
+	}
 }

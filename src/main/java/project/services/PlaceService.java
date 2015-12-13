@@ -8,4 +8,6 @@ public interface PlaceService {
 
 	public List<Place> retrieveAllPlace();
 	
+	public Place retrievePlaceById(int placeId);
+	
 }
